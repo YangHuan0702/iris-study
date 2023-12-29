@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/context"
 	"iris-study/src/config"
 	"iris-study/src/module/factory"
 )
@@ -16,6 +17,11 @@ func main() {
 	logger := config.GetLog()
 
 	err := instance.App.Run(iris.Addr(":8080"))
+
+	instance.App.OnErrorCode(iris.StatusNotFound, func(context *context.Context) {
+		context.JSON(config.Panic(iris.StatusNotFound))
+	})
+
 	if err != nil {
 		logger.Error("Application Start Error: " + err.Error())
 	}
