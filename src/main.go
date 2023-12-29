@@ -7,7 +7,7 @@ import (
 	"iris-study/src/module/factory"
 )
 
-import _ "iris-study/src/mvc"
+import _ "iris-study/src/mvc/user"
 
 func main() {
 	fmt.Println("========================START Iris-Study==========================")
