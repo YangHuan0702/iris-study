@@ -8,7 +8,7 @@ import (
 )
 import _ "github.com/jinzhu/gorm/dialects/postgres"
 
-var logger *zap.Logger
+var logger *zap.SugaredLogger
 var db *gorm.DB = nil
 var mutex = sync.Mutex{}
 

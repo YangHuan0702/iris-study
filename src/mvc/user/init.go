@@ -8,7 +8,7 @@ import (
 	"iris-study/src/service"
 )
 
-var logger *zap.Logger
+var logger *zap.SugaredLogger
 var userController = &UserController{userService: service.GetUserService()}
 
 func init() {

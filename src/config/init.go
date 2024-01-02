@@ -11,11 +11,11 @@ var serverInstance *ServerInstance = nil
 var mutex = sync.Mutex{}
 
 type ServerInstance struct {
-	Logger *zap.Logger
+	Logger *zap.SugaredLogger
 }
 
 // 获取Logger对象
-func GetLog() *zap.Logger {
+func GetLog() *zap.SugaredLogger {
 	mutex.Lock()
 	if serverInstance == nil {
 		serverInstance = &ServerInstance{}
@@ -49,7 +49,13 @@ func initLog() {
 	debugCore := zapcore.NewCore(encoder, zapcore.AddSync(debugLog), zapcore.DebugLevel)
 
 	tee := zapcore.NewTee(errorCore, debugCore)
-	serverInstance.Logger = zap.New(tee, zap.AddCaller())
+	logger := zap.New(tee, zap.AddCaller())
+	serverInstance.Logger = logger.Sugar()
+
+	//app := factory.GetServerFactoryInstance().App
+	//
+	//app.Logger().AddOutput(os.Stdout)
+	//app.Logger().AddOutput(os.Stderr)
 }
 
 //func registerMvc() {
