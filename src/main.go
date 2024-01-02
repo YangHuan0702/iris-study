@@ -9,6 +9,7 @@ import (
 )
 
 import _ "iris-study/src/mvc/user"
+import _ "iris-study/src/interceptor"
 
 func main() {
 	fmt.Println("========================START Iris-Study==========================")
